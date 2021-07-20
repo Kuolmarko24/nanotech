@@ -1,0 +1,42 @@
+{% extends 'nanoitems/main.html'%}
+{% load static %}
+{% block content %}
+<form action="/Update/{{Product.id}}" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <div>
+        <h1>Edit and update Student Record</h1>
+         <h1>The Product id is {{Product.id}}</h1>
+            <table class="table table-sm">
+                <tr>
+                    <th>Item</th>
+                    <td><input type="text" name="item" value="{{Product.item}}"></td>
+                </tr>
+                <tr>
+                    <th>Type</th>
+                    <td><input type="text" name="type" value="{{Product.type}}"></td>
+                </tr>
+                <tr>
+                    <th>Quantity</th>
+                    <td><input type="number" name="qty" value="{{Product.quantity}}"></td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td><input type="number" name="price" value="{{Product.price}}"></td>
+                </tr>
+                <tr>
+                    <th>Specs</th>
+                    <td><input type="text" name="specs" value="{{Product.specs}}"></td>
+                </tr>
+            </table>
+            <input type="submit" class="btn btn-primary" value="Update">
+         <a class="btn btn-secondary" href="{% url 'products' %}">Home</a>
+           <hr>
+            {% if messages %}
+            {% for result in messages %}
+            <b style="color:green">{{result}}</b>
+            {% endfor %}
+            {% endif %}
+        </div>
+</form>
+{% endblock %}

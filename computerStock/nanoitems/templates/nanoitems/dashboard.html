@@ -1,0 +1,38 @@
+{% extends 'nanoitems/main.html'%}
+{% block content %}
+<div class="row">
+    <div class="col-md-10">
+        <h5>Current Available Stock</h5>
+        <hr>
+        <div class="card card-body">
+            <a class="btn btn-primary btn-sm btn-block" href="{% url 'addproduct' %}">Post product</a>
+            <table class="table table-sm">
+                <tr>
+                    <th>Item</th>
+                    <th>Type</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Specs</th>
+                    <th>Update</th>
+                    <th>View</th>
+                    <th>Remove</th>
+
+                </tr>
+                 {% for i in products %}
+                <tr>
+                    <td>{{i.item}}</td>
+                    <td>{{i.type}}</td>
+                    <td>{{i.quantity}}</td>
+                     <td>{{i.price}}</td>
+                     <td>{{i.specs}}</td>
+                     <td><a class="btn btn-sm btn-info" href="/Edit/{{i.id}}">Update</a></td>
+
+                     <td><a class="btn btn-sm btn-info" href="">View</a></td>
+                    <td><a class="btn btn-sm btn-danger"  href="/Delete/{{i.id}}" onclick="return confirm('Are you sure you want to delete?')">Remove</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'nanoitems/main.html'%}
+{% load static %}
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <div>
+            <table class="table table-sm">
+                <tr>
+                    <th>Promo Name</th>
+                    <td><input type="text" name="promo_name" placeholder="Promo name"></td>
+                </tr>
+                <tr>
+                    <th>Category</th>
+                     <td>
+                    <input type="radio" name="category" value="Laptop" group="category">Laptop
+                    <input type="radio" name="category" value="Desktop" group="category">Desktop
+                    </td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>
+                    <input type="radio" name="status" value="On Promotion" group="status">On Promotion
+                    <input type="radio" name="status" value="Upcoming" group="status">Upcoming
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" class="btn btn-primary" value="Add promo">
+         <a class="btn btn-secondary" href="{% url 'promotions' %}">View All</a>
+           <hr>
+            {% if messages %}
+            {% for result in messages %}
+            <b style="color:green">{{result}}</b>
+            {% endfor %}
+            {% endif %}
+        </div>
+</form>
+{% endblock %}

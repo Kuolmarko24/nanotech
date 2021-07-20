@@ -1,0 +1,39 @@
+{% extends 'nanoitems/main.html'%}
+{% load static %}
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <div>
+            <table class="table table-sm">
+                <tr>
+                    <th>Item</th>
+                    <td><input type="text" name="item" placeholder="Item"></td>
+                </tr>
+                <tr>
+                    <th>Type</th>
+                    <td><input type="text" name="type" placeholder="Type"></td>
+                </tr>
+                <tr>
+                    <th>Quantity</th>
+                    <td><input type="number" name="qty" placeholder="Quantity"></td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td><input type="number" name="price" placeholder="Price"></td>
+                </tr>
+                <tr>
+                    <th>Specs</th>
+                    <td><input type="text" name="specs" placeholder="Specs"></td>
+                </tr>
+            </table>
+            <input type="submit" class="btn btn-primary" value="Insert Record">
+         <a class="btn btn-secondary" href="{% url 'products' %}">Home</a>
+           <hr>
+            {% if messages %}
+            {% for result in messages %}
+            <b style="color:green">{{result}}</b>
+            {% endfor %}
+            {% endif %}
+        </div>
+</form>
+{% endblock %}
