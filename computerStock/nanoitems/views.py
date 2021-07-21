@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.mail import send_mail
 from django.contrib import messages
 from .forms import ProductForm
@@ -6,6 +6,7 @@ from .forms import ProductForm
 from django.http import HttpResponse
 from .models import *
 from .forms import  ProductForm
+
 # Create your views here.
 def home(request):
     total_promotions = promotions.count()
@@ -67,16 +68,45 @@ def addpromotion(request):
     else:
         return render(request,"nanoitems/addpromotion.html")
 # end of post promotion
+
+
 def editproduct(request,id):
-    productdetails = Product.objects.get(id=id)
-    return render(request,'nanoitems/edit.html',{"Product":productdetails})
+    
+    produpdate = get_object_or_404(Product, id=id)
+
+    if request.method == "POST":
+        produpdate.item = request.POST["item"]
+        produpdate.type = request.POST["type"]
+        produpdate.quantity = request.POST["qty"]
+        produpdate.price = request.POST["price"]
+        produpdate.specs = request.POST["specs"]
+
+        produpdate.save()
+        messages.success(request,"The product record is updated successfully...")
+        
+        return render(request,"nanoitems/edit.html",{"Product":produpdate})
+
+
+    return render(request,'nanoitems/edit.html',{"Product":produpdate})
+
+
+def viewproduct(request,id):
+    
+    produpdate = get_object_or_404(Product, id=id)
+
+    return render(request,'nanoitems/view.html',{"Product":produpdate})
+
+
 def productUpdate(request,id):
     pupdate=Product.objects.get(id=id)
+
     form = ProductForm(request.POST, instance=pupdate)
     if form.is_valid():
         form.save()
         messages.success(request,"The product record is updated successfully...")
     return render(request,"nanoitems/edit.html",{"Product":pupdate})
+
+
 def productdelete(request,id):
     delstudent = Product.objects.get(id=id)
     delstudent.delete()
