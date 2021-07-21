@@ -1,9 +1,8 @@
 {% extends 'nanoitems/main.html'%}
 {% load static %}
 {% block content %}
-<form action="/Update/{{Product.id}}" method="POST">
+<form action="{% url 'edit' Product.id %}" method="POST">
     {% csrf_token %}
-    {{form}}
     <div>
         <h1>Edit and update Student Record</h1>
          <h1>The Product id is {{Product.id}}</h1>

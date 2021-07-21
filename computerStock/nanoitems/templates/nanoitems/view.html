@@ -1,0 +1,36 @@
+{% extends 'nanoitems/main.html'%}
+{% load static %}
+{% block content %}
+<form action="" >
+    {% csrf_token %}
+    <div>
+        <h1>View Student Record</h1>
+         <h1>The Product id is {{Product.id}}</h1>
+            <table class="table table-sm">
+                <tr>
+                    <th>Item</th>
+                    <td><input type="text" disabled name="item" value="{{Product.item}}"></td>
+                </tr>
+                <tr>
+                    <th>Type</th>
+                    <td><input type="text" disabled name="type" value="{{Product.type}}"></td>
+                </tr>
+                <tr>
+                    <th>Quantity</th>
+                    <td><input type="number" disabled name="qty" value="{{Product.quantity}}"></td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td><input type="number" disabled name="price" value="{{Product.price}}"></td>
+                </tr>
+                <tr>
+                    <th>Specs</th>
+                    <td><input type="text" disabled name="specs" value="{{Product.specs}}"></td>
+                </tr>
+            </table>
+            
+         <a class="btn btn-secondary" href="{% url 'products' %}">Home</a>
+           
+        </div>
+</form>
+{% endblock %}

@@ -14,6 +14,7 @@ urlpatterns = [
     path('addpromotion/', views.addpromotion, name='addpromotion'),
     path('contactus/', views.contactus,name='contactus'),
     path('addproduct/', views.addproduct,name='addproduct'),
+    path('View/<int:id>',views.viewproduct,name='view'),
     path('Edit/<int:id>',views.editproduct,name='edit'),
     path('Update/<int:id>',views.productUpdate,name='productUpdate'),
     path('Delete/<int:id>',views.productdelete,name='productdelete'),
